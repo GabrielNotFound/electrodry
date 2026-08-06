@@ -1,5 +1,5 @@
 import Constants from "@/src/shared/constants/Constants";
-import usePostRequest from "@/src/shared/hooks/usePostRequest";
+import useApiRequest from "@/src/shared/hooks/useApiRequest";
 import { useState } from "react";
 import {
   Image,
@@ -18,7 +18,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [franchiseId, setFranchiseId] = useState("");
 
-  const { makePostRequest, loading, error } = usePostRequest();
+  const { makePostRequest, loading, error } = useApiRequest();
   const setAuth = useAuthStore((state) => state.setAuth);
 
   const handleSignIn = async () => {
