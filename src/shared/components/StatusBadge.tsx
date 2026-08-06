@@ -1,4 +1,3 @@
-// shared/components/StatusBadge.tsx
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Colors from "../constants/Colors";
