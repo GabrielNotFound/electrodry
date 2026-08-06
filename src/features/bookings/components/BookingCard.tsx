@@ -1,7 +1,8 @@
+import StatusBadge from "@/src/shared/components/StatusBadge";
+import Colors from "@/src/shared/constants/Colors";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Colors from "../../../shared/constants/Colors";
 import { Booking, BookingStatus } from "../Types";
 
 const STATUS_CONFIG: Record<BookingStatus, { label: string; color: string }> = {
@@ -9,12 +10,6 @@ const STATUS_CONFIG: Record<BookingStatus, { label: string; color: string }> = {
   pending: { label: "Pending", color: Colors.badgePending },
   complete: { label: "Complete", color: Colors.badgeComplete },
 };
-
-const Badge = ({ label, color }: { label: string; color: string }) => (
-  <View style={[styles.badge, { backgroundColor: color }]}>
-    <Text style={styles.badgeText}>{label}</Text>
-  </View>
-);
 
 interface BookingCardProps {
   booking: Booking;
@@ -27,9 +22,12 @@ const BookingCard = ({ booking }: BookingCardProps) => {
   return (
     <View style={styles.card}>
       <View style={styles.badgeRow}>
-        <Badge label={status.label} color={status.color} />
+        <StatusBadge label={status.label} color={status.color} />
         {booking.secondaryTag && (
-          <Badge label={booking.secondaryTag} color={Colors.badgeQuotation} />
+          <StatusBadge
+            label={booking.secondaryTag}
+            color={Colors.badgeQuotation}
+          />
         )}
       </View>
 
@@ -65,29 +63,9 @@ const BookingCard = ({ booking }: BookingCardProps) => {
 };
 
 const styles = StyleSheet.create({
-  card: {
-    padding: 16,
-  },
-  badgeRow: {
-    flexDirection: "row",
-    gap: 8,
-    marginBottom: 10,
-  },
-  badge: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 6,
-  },
-  badgeText: {
-    color: Colors.background,
-    fontWeight: "600",
-    fontSize: 13,
-  },
-  date: {
-    color: Colors.textLight,
-    fontSize: 13,
-    marginBottom: 4,
-  },
+  card: { padding: 16 },
+  badgeRow: { flexDirection: "row", gap: 8, marginBottom: 10 },
+  date: { color: Colors.textLight, fontSize: 13, marginBottom: 4 },
   name: {
     fontSize: 20,
     fontWeight: "700",
@@ -100,24 +78,10 @@ const styles = StyleSheet.create({
     gap: 4,
     marginBottom: 10,
   },
-  location: {
-    color: Colors.text,
-    fontSize: 14,
-    flexShrink: 1,
-  },
-  detailRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 16,
-    marginTop: 4,
-  },
-  detailLine: {
-    fontSize: 14,
-    color: Colors.text,
-  },
-  detailLabel: {
-    fontWeight: "700",
-  },
+  location: { color: Colors.text, fontSize: 14, flexShrink: 1 },
+  detailRow: { flexDirection: "row", flexWrap: "wrap", gap: 16, marginTop: 4 },
+  detailLine: { fontSize: 14, color: Colors.text },
+  detailLabel: { fontWeight: "700" },
 });
 
 export default BookingCard;

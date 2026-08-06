@@ -1,9 +1,10 @@
 import { useState } from "react";
 import {
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    StyleSheet
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
 } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import Colors from "../../../shared/constants/Colors";
@@ -30,11 +31,11 @@ const LoginScreen = () => {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
       <ScrollView contentContainerStyle={styles.container}>
-        {/* <Image
-          source={require("../../../../assets/electrodry-logo.png")}
+        <Image
+          source={require("../../../../assets/images/Electrodry.png")}
           style={styles.logo}
           resizeMode="contain"
-        /> */}
+        />
 
         <Text style={styles.title}>Sign In to your Account</Text>
         <Text style={styles.subtitle}>

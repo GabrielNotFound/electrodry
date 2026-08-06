@@ -1,3 +1,4 @@
+// features/bookings/Types.ts
 export type BookingStatus = "new" | "pending" | "complete";
 
 export interface Booking {
@@ -10,4 +11,24 @@ export interface Booking {
   bookingId: string;
   quotedPrice: number;
   depositTaken: number;
+}
+
+export interface LineItem {
+  type: string;
+  description?: string;
+  quantity: number;
+  amount: number;
+}
+
+export interface BookingDetails extends Booking {
+  scheduleDate: string;
+  startTime: string;
+  customerName: string;
+  customAddress: string;
+  phoneNumber: string;
+  workPhone?: string;
+  customerEmail: string;
+  internalJobNotes: string;
+  cleaningDetails: LineItem[];
+  quotedJob: LineItem[];
 }

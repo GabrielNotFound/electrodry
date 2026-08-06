@@ -1,8 +1,13 @@
+import { PaperProvider } from "react-native-paper";
 import ApplicationNavigator from "./src/navigation/ApplicationNavigator";
-// Note: this file goes at the project root; 'src' is the folder created above
+import LightTheme from "./src/shared/constants/Theme";
 
 const App = () => {
-  return <ApplicationNavigator />;
+  return (
+    <PaperProvider theme={LightTheme}>
+      <ApplicationNavigator />
+    </PaperProvider>
+  );
 };
 
 export default App;

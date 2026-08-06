@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, Image, StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Colors from "../../../shared/constants/Colors";
@@ -47,11 +47,11 @@ const BookingListScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* <Image
-        source={require("../../../../assets/electrodry-logo.png")}
+      <Image
+        source={require("../../../../assets/images/Electrodry.png")}
         style={styles.logo}
         resizeMode="contain"
-      /> */}
+      />
 
       <View style={styles.headerButtons}>
         <Button
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     width: 220,
     height: 90,
     alignSelf: "center",
-    marginBottom: 16,
+    marginVertical: 16,
   },
   headerButtons: {
     flexDirection: "row",
