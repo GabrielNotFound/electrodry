@@ -1,35 +1,28 @@
 const IS_DEV = true;
 
+const DEV_URL = "https://edry.escarez.com/api2/";
 const PROD_URL = "";
-const DEV_URL = "";
 
-const BASE_DEV = {
+const Constants = {
+  IS_DEV,
+  BASE_URI: IS_DEV ? DEV_URL : PROD_URL,
+
   API_OK: 1,
   API_NOT_OK: 0,
 
-  API_KEY: "REPLACE_WITH_YOUR_API_KEY",
-  BASE_URI: IS_DEV ? DEV_URL : PROD_URL,
-
   ENDPOINT: {
     // AUTH
-    LOGIN: "auth/login/",
-    GET_USER_DETAILS: "auth/get_user_details/",
+    LOGIN: "mobile/auth/login/",
+    REFRESH: "mobile/auth/refresh/",
+    LOGOUT: "mobile/auth/logout/",
+    ME: "mobile/auth/me/",
 
     // BOOKINGS
-    GET_BOOKING_LIST: "booking/get_list/",
-    GET_BOOKING_DETAILS: "booking/get_details/",
-    UPDATE_BOOKING_STATUS: "booking/update_status/",
-
-    // PRE-INSPECTION
-    SUBMIT_PRE_INSPECTION: "inspection/submit/",
-    UPLOAD_INSPECTION_PHOTO: "inspection/upload_photo/",
-
-    // RECONCILIATION / REPORTS
-    GET_DAILY_RECONCILIATION: "reports/daily_reconciliation/",
-    GET_WEEKLY_REPORT: "reports/weekly/",
+    GET_BOOKING: (bookingId) => `mobile/bookings/${bookingId}/`,
+    FINISH_BOOKING: (bookingId) => `mobile/bookings/${bookingId}/finish/`,
+    GET_TECHNICIAN_BOOKINGS: (technicianId) =>
+      `mobile/bookings/technician/${technicianId}/`,
   },
 };
-
-const Constants = { ...BASE_DEV, IS_DEV };
 
 export default Constants;
