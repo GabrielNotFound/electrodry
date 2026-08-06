@@ -1,4 +1,3 @@
-// features/bookings/Types.ts
 export type BookingStatus = "new" | "pending" | "complete";
 
 export interface Booking {
