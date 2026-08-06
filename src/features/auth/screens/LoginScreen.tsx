@@ -1,3 +1,5 @@
+import Constants from "@/src/shared/constants/Constants";
+import usePostRequest from "@/src/shared/hooks/usePostRequest";
 import { useState } from "react";
 import {
   Image,
@@ -9,20 +11,31 @@ import {
 import { Button, Text, TextInput } from "react-native-paper";
 import Colors from "../../../shared/constants/Colors";
 import { navigateAndSimpleReset } from "../../../shared/utils/NavigationService";
+import { useAuthStore } from "../store";
 
 const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [franchiseId, setFranchiseId] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleSignIn = () => {
-    // TODO: replace with real auth call
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+  const { makePostRequest, loading, error } = usePostRequest();
+  const setAuth = useAuthStore((state) => state.setAuth);
+
+  const handleSignIn = async () => {
+    const { response, error: reqError } = await makePostRequest(
+      Constants.ENDPOINT.LOGIN,
+      { username, password },
+      {},
+      "json",
+    );
+
+    if (reqError) return;
+
+    if (response?.data) {
+      const { access, refresh, user } = response.data;
+      await setAuth({ accessToken: access, refreshToken: refresh, user });
       navigateAndSimpleReset("BookingListScreen");
-    }, 400);
+    }
   };
 
   return (
@@ -41,6 +54,8 @@ const LoginScreen = () => {
         <Text style={styles.subtitle}>
           Welcome back enter you correct credentials to Sign In
         </Text>
+
+        {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
 
         <TextInput
           mode="outlined"
@@ -95,11 +110,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     paddingVertical: 48,
   },
-  logo: {
-    width: 280,
-    height: 140,
-    marginBottom: 24,
-  },
+  logo: { width: 280, height: 140, marginBottom: 24 },
   title: {
     fontSize: 28,
     fontWeight: "700",
@@ -118,15 +129,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     backgroundColor: Colors.background,
   },
-  button: {
-    width: "100%",
-    maxWidth: 480,
-    borderRadius: 8,
-    marginTop: 8,
-  },
-  buttonContent: {
-    paddingVertical: 6,
-  },
+  button: { width: "100%", maxWidth: 480, borderRadius: 8, marginTop: 8 },
+  buttonContent: { paddingVertical: 6 },
 });
 
 export default LoginScreen;
